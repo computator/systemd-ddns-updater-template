@@ -1,0 +1,9 @@
+[Unit]
+Description=Dynamic DNS Updater
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+EnvironmentFile=/etc/ddns-updater.conf
+ExecStart=/bin/sh -c 'ip="$${2:+$$(curl --ipv4 -sfL "$$2")}"; url="$${1}$${ip:+"&myip=$${ip}"}"; echo -n "request: $$url\nresponse: "; curl -sSL "$$url"' -- ${URL} ${IP_CHECK_URL}
+SyslogIdentifier=%p

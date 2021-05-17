@@ -1,0 +1,9 @@
+[Unit]
+Description=Timer to run Dynamic DNS Updater
+
+[Timer]
+OnBootSec=1m
+OnUnitActiveSec=1h
+
+[Install]
+WantedBy=timers.target
